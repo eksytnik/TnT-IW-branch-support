@@ -1,0 +1,41 @@
+macro=;
+xmu: noprvmix;
+goto = %0 ;
+
+clb;
+
+var: kmin kmax; 
+
+set kmin %1; set kmax %2;
+
+macreport=;
+pi-;
+k0;
+echo-;
+report=;
+
+log/;
+macreport-;
+log out.txt;
+
+rse0; ho1000;
+mult=replic 10;
+xmu: prvmix;
+xmu= hits 5 level 5 drift3;
+
+loop 'kmin' ('kmax')
+	rse0; ho100;
+	pi=#1;
+	k1;
+	xmu: prvmix;
+	xmu= hits 5 level 5 drift3;
+	bb;
+	bbreak=tbr;
+	taxname = ; 
+	blength *0;
+	ts* k#1..tre;
+	save;
+	ts/;
+procedure/;
+stop;
+quit;
